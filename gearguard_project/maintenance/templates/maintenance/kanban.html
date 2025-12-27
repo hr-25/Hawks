@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maintenance Kanban Board</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+        .board {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+        .column {
+            background: #ffffff;
+            width: 25%;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .column h2 {
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .card {
+            background: #ecf0f1;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .scrap {
+            background: #ffcccc;
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">Maintenance Kanban Board</h1>
+
+<div class="board">
+
+    <div class="column">
+        <h2>New</h2>
+        {% for req in new_requests %}
+            <div class="card">
+                <strong>{{ req.subject }}</strong><br>
+                Equipment: {{ req.equipment.name }}
+            </div>
+        {% empty %}
+            <p>No tasks</p>
+        {% endfor %}
+    </div>
+
+    <div class="column">
+        <h2>In Progress</h2>
+        {% for req in progress_requests %}
+            <div class="card">
+                <strong>{{ req.subject }}</strong><br>
+                Equipment: {{ req.equipment.name }}
+            </div>
+        {% empty %}
+            <p>No tasks</p>
+        {% endfor %}
+    </div>
+
+    <div class="column">
+        <h2>Repaired</h2>
+        {% for req in done_requests %}
+            <div class="card">
+                <strong>{{ req.subject }}</strong><br>
+                Equipment: {{ req.equipment.name }}
+            </div>
+        {% empty %}
+            <p>No tasks</p>
+        {% endfor %}
+    </div>
+
+    <div class="column">
+        <h2>Scrap</h2>
+        {% for req in scrap_requests %}
+            <div class="card scrap">
+                <strong>{{ req.subject }}</strong><br>
+                Equipment: {{ req.equipment.name }}
+            </div>
+        {% empty %}
+            <p>No tasks</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>
